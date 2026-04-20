@@ -1,29 +1,25 @@
-name: Deploy to VPS via SFTP
-
+name: scp files
 on:
   push:
     branches:
       - main
-
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      
-      - name: SFTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+      - uses: actions/checkout@v4
+      - name: Copy files via SSH
+        uses: appleboy/scp-action@v1
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps 
           port: 22
-          server-dir: /var/www/357ltd/
+          source: "."
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
             **/.github/**
+          target: "/var/www/357ltd"
