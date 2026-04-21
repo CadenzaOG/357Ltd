@@ -22,6 +22,7 @@ CREATE TABLE product (
     description varchar(1024),
     price DEC(7,2),
     category_id int(11),
+    stock int(11),
     FOREIGN KEY (category_id) REFERENCES category(category_id)
 );
 
