@@ -18,11 +18,11 @@ class LoginController extends Dbh
         $stmt->bindParam(':studentNumber', $studentNumber);
 
         if (!$stmt->execute()) {
-            header("location:../../login.php?=stmtfail");
+            header('Location:' . __DIR__ . '../../login.php?=stmtfail');
             exit;
         }
         $user = $stmt->fetch();
-        if ($user && password_verify($password, $user['password'])) {
+        if ($user && password_verify($password, $user->password)) {
             return $user;
         }
         return false;

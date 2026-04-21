@@ -15,6 +15,8 @@ if (isset($_SESSION['user'])) {
 </head>
 <body>
 <h1>Hello,world</h1>
-<h1><?= $name ?></h1> <!-- printing name to test session variables have been set -->
+<p>Testing deployment from github</p>
+<p>Testing branch protection rule</p>
+<h1><?= $name ?></h1>
 </body>
 </html>
