@@ -1,19 +1,20 @@
 <?php
 
-session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 'on');
 
-$username = '';
+require_once __DIR__ . '/resources/classes/Dbh.php';
+require_once __DIR__ . '/resources/classes/LoginController.php';
+
+$studentNumber = '';
 $password = '';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $username = $_POST['username'];
+    $studentNumber = $_POST['username'];
     $password = $_POST['password'];
-}
 
-// Temporary hard coded login values.  Check with Database here and redirect user.
-
-if ($username === 'admin' && $password === 'password') {
-    echo 'Welcome!';
+    $loginController = new LoginController($studentNumber, $password);
+    $loginController->login();
 } else {
-    echo 'You can\'t come in';
+    header('Location:login.html');
 }
