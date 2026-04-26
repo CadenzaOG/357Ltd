@@ -1,5 +1,10 @@
 <?php
 
+/*
+ * Author: Sean Boa
+ * Date: April 2026
+ */
+
 class LoginController extends Dbh
 {
 

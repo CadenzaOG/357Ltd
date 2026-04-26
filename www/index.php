@@ -1,5 +1,7 @@
 <?php
 
+// Placeholder index page, just using for testing backend and outputting database/session information.
+
 session_start();
 
 if (isset($_SESSION['user'])) {
