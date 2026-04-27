@@ -1,6 +1,6 @@
 <?php
 
-class SignupController extends Dbh
+class SignupController extends DatabaseHandler
 {
     private $pdo;
     private $forename;

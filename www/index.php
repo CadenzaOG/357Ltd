@@ -16,9 +16,11 @@ if (isset($_SESSION['user'])) {
     <title>Title</title>
 </head>
 <body>
-<h1>Hello,world</h1>
-<p>Testing deployment from github</p>
-<p>Testing branch protection rule</p>
-<h1><?= $name ?></h1>
+<?php
+if (isset($_SESSION['user'])): ?>
+    <h1>Hello, <?= $name ?></h1>
+<?php else: ?>
+    <h1>Hello, world</h1>
+<?php endif; ?>
 </body>
 </html>
