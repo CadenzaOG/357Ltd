@@ -65,7 +65,7 @@ class SignupController extends Dbh
     }
 
     private function userExists() {
-        $stmt = $this->pdo->prepare("SELECT * FROM customer WHERE email = :email OR studentNumber = :studentNumber");
+        $stmt = $this->pdo->prepare("SELECT * FROM customer WHERE email = :email OR student_number = :studentNumber");
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":studentNumber", $this->studentNumber);
 
