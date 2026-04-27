@@ -1,12 +1,5 @@
 <?php
 
-/*
- *
- * curl -L -X POST "https://teamplusplus.com/resources/handlers.php" \
- * -d "forename=sean&surname=boa&email=test@test2.com&student_number=87654321&house=1&street=Drury Lane&town=London&postcode=IV11LS&password=password&password=password"
- *
- */
-
 require_once __DIR__.'/../classes/Dbh.php';
 require_once __DIR__ . '/../classes/SignupController.php';
 require_once __DIR__.'/../classes/LoginController.php';
