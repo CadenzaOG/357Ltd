@@ -51,7 +51,9 @@ class SignupController extends Dbh
         $stmt->bindParam(':street', $this->street);
         $stmt->bindParam(':town', $this->town);
         $stmt->bindParam(':postcode', $this->postcode);
-        $stmt->bindParam(':password', $this->password);
+
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $stmt->bindParam(':password', $hashedPassword);
 
         $stmt->execute();
     }
