@@ -51,13 +51,19 @@ class SignupController extends DatabaseHandler
         $stmt->bindParam(':street', $this->street);
         $stmt->bindParam(':town', $this->town);
         $stmt->bindParam(':postcode', $this->postcode);
-        $stmt->bindParam(':password', $this->password);
 
-        $stmt->execute();
+        $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
+        $stmt->bindParam(':password', $hashedPassword);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
     }
 
     private function userExists() {
-        $stmt = $this->pdo->prepare("SELECT * FROM customer WHERE email = :email OR studentNumber = :studentNumber");
+        $stmt = $this->pdo->prepare("SELECT * FROM customer WHERE email = :email OR student_number = :studentNumber");
         $stmt->bindParam(":email", $this->email);
         $stmt->bindParam(":studentNumber", $this->studentNumber);
 
