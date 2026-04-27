@@ -1,5 +1,7 @@
 <?php
 
+
+
 class SignupController extends Dbh
 {
     private $pdo;
@@ -55,7 +57,11 @@ class SignupController extends Dbh
         $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
         $stmt->bindParam(':password', $hashedPassword);
 
-        $stmt->execute();
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        return false;
     }
 
     private function userExists() {
