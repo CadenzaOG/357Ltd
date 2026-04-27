@@ -7,7 +7,7 @@
 
 require_once(__DIR__ . '/../../../dbconfig.php');
 
-class Dbh
+class DatabaseHandler
 {
     protected function connect() {
         try {

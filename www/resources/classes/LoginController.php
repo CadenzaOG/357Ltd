@@ -5,7 +5,7 @@
  * Date: April 2026
  */
 
-class LoginController extends Dbh
+class LoginController extends DatabaseHandler
 {
 
     private $studentNumber;
