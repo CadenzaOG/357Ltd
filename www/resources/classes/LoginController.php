@@ -45,7 +45,7 @@ class LoginController extends DatabaseHandler
             header('Location:../../index.php?='.$_SESSION['user']['name']);
             exit();
         } else {
-            header('Location:../../login.php?error=notfound');
+            header('Location:../../index.php?error=usernotfound');
         }
 
     }
