@@ -12,6 +12,5 @@ $allProducts = $productController->getAllProducts();
 <ul>
     <?php foreach ($allProducts as $product): ?>
     <li>Name: <?= $product->name . ' | Description:' . $product->description . ' | Price: £' . $product->price . ' | Stock' . $product->stock ?></li>
-</ul>
 <?php endforeach; ?>
-// Test file for printing products
+</ul>
