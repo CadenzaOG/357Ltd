@@ -22,5 +22,10 @@ if (isset($_SESSION['user'])): ?>
 <?php else: ?>
     <h1>Hello, world</h1>
 <?php endif; ?>
+<ul>
+<li><a href="login.html">Login</a></li>
+<li><a href="signup.html">Sign up</a></li>
+<li><a href="products.php">Products</a></li>
+</ul>
 </body>
 </html>
