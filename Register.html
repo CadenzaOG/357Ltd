@@ -3,8 +3,8 @@
 		<script>
 			//ensures a password is entered
 			function validatePass(){
-			var x=document.forms["userForm"]["Pass"].value;
-				if (x==null || x==""){
+			var password=document.forms["userForm"]["Pass"].value;
+				if (password==null || password===""){
 					document.getElementById('errorPassword').innerHTML = 'Please enter a password.';
 				}
 				else{
@@ -13,10 +13,10 @@
 			}
 			//ensures an email is entered
 			function validateEmail(){
-			var x=document.forms["userForm"]["Email"].value;
-			var atpos=x.indexOf("@");
-			var dotpos=x.lastIndexOf(".");
-				if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length){
+			var email=document.forms["userForm"]["Email"].value;
+			var atPosition=email.indexOf("@");
+			var dotPosition=email.lastIndexOf(".");
+				if (atPosition<1 || dotPosition<atPosition+2 || dotPosition+2>=email.length){
 					document.getElementById('errorEmail').innerHTML = 'Please enter a valid email address.';
 					}
 				else{
