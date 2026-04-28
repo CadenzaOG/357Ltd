@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/../classes/Dbh.php';
+require_once __DIR__.'/../classes/DatabaseHandler.php';
 require_once __DIR__ . '/../classes/SignupController.php';
 require_once __DIR__.'/../classes/LoginController.php';
 
