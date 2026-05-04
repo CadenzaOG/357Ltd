@@ -27,5 +27,6 @@ if (isset($_SESSION['user'])): ?>
 <li><a href="signup.html">Sign up</a></li>
 <li><a href="products.php">Products</a></li>
 </ul>
+<br><br>
 </body>
 </html>

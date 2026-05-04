@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require __DIR__ . '/resources/classes/DatabaseHandler.php';
 require __DIR__ . '/resources/classes/ProductController.php';
 
@@ -7,10 +9,59 @@ $productController = new ProductController();
 
 $allProducts = $productController->getAllProducts();
 
+$productsById = [];
+foreach ($allProducts as $product) {
+    $productsById[$product->product_id] = $product;
+}
+
 ?>
+
+<style>
+    table,th,td {
+        border: 1px solid;
+    }
+</style>
 <h1>All Products</h1>
-<ul>
+<table style="border: 1px solid">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Available Stock</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
     <?php foreach ($allProducts as $product): ?>
-    <li>Name: <?= $product->name . ' | Description:' . $product->description . ' | Price: £' . $product->price . ' | Stock' . $product->stock ?></li>
-<?php endforeach; ?>
-</ul>
+        <form action="resources/handlers/addtobasket.php" method="post">
+        <tr>
+                <td><?= htmlspecialchars($product->name) ?></td>
+                <td><?= htmlspecialchars($product->description) ?></td>
+                <td>£<?= htmlspecialchars($product->price) ?></td>
+                <td><?= htmlspecialchars($product->stock) ?></td>
+                <td>
+                    <input type="number" name="quantity" value="1" min="1" max="<?= $product->stock ?>">
+                    <input type="hidden" name="product_id" value="<?= $product->product_id ?>">
+                </td>
+                <td>
+                    <button type="submit">Add to Basket</button>
+                </td>
+
+        </tr>
+        </form>
+    <?php endforeach; ?>
+</table>
+
+<h1>Basket</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+        <?php foreach ($_SESSION['user']['basket'] as $id => $item): ?>
+    <tr>
+        <td><?= $productsById[$id]->name?></td>
+        <td><?=$item['quantity']?></td>
+    </tr>
+        <?php endforeach; ?>
+
+</table>
