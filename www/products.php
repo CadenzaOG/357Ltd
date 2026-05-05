@@ -39,8 +39,8 @@ foreach ($allProducts as $product) {
                 <td>£<?= htmlspecialchars($product->price) ?></td>
                 <td><?= htmlspecialchars($product->stock) ?></td>
                 <td>
-                    <input type="number" name="quantity" value="1" min="1" max="<?= $product->stock ?>">
-                    <input type="hidden" name="product_id" value="<?= $product->product_id ?>">
+                    <input type="number" name="add_quantity" value="1" min="1" max="<?= $product->stock ?>">
+                    <input type="hidden" name="add_product_id" value="<?= $product->product_id ?>">
                 </td>
                 <td>
                     <button type="submit" name="action" value="add">Add to Basket</button>
