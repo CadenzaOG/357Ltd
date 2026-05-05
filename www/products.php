@@ -58,13 +58,22 @@ foreach ($allProducts as $product) {
         <th>Quantity</th>
         <th>Price</th>
     </tr>
-        <?php foreach ($_SESSION['user']['basket'] as $id => $item): ?>
+        <?php
+        $total = 0;
+        foreach ($_SESSION['user']['basket'] as $id => $item): ?>
         <form action="resources/handlers/basket.handler.php" method="post">
     <tr>
         <td><?= $productsById[$id]->name?></td>
         <td><input type="number" name="quantity[<?=$id?>]" min="0" max="<?=$productsById[$id]->stock ?>" value="<?=$item['quantity']?>"></td>
+        <td>£<?=$price=$productsById[$id]->price * $item['quantity'] ?></td>
     </tr>
-        <?php endforeach; ?>
+        <?php
+        $total += $price;
+        endforeach; ?>
+            <tr>
+                <th>Total: </th>
+                <td colspan="2">£<?=$total?></td>
+            </tr>
 </table>
 <button type="submit" name="action" value="update">Update Basket</button>
 </form>
