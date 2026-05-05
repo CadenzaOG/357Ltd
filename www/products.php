@@ -64,7 +64,6 @@ foreach ($allProducts as $product) {
         <td><?= $productsById[$id]->name?></td>
         <td><input type="number" name="quantity<?=[$id]?>" min="0" max="<?=$productsById[$id]->stock ?>" value="<?=$item['quantity']?>"></td>
     </tr>
-        </form>
         <?php endforeach; ?>
 </table>
 <button type="submit" name="action" value="update">Update Basket</button>

@@ -16,8 +16,10 @@ if ($action == "update") {
     foreach ($_POST['quantity'] as $id => $quantity) {
         if ($quantity > 0) {
             $basketController->updateBasketItem($id, $quantity);
+            header('Location: ../../products.php?basket=updated');
         } else {
             $basketController->removeFromBasket($id);
+            header('Location: ../../products.php?basket=updated');
         }
     }
 }
@@ -26,6 +28,7 @@ if ($action == "add") {
     $productId = $_POST['add_product_id'];
     $quantity = $_POST['add_quantity'];
     $basketController->addItemToBasket($productId, $quantity);
+    header('Location: ../../products.php?basket=updated');
 }
 
 
