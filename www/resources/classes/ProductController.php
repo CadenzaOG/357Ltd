@@ -25,6 +25,14 @@ class ProductController extends DatabaseHandler
         return $product;
     }
 
+    public function getProductPrice($id) {
+        $stmt = $this->pdo->prepare("SELECT price FROM product WHERE product_id = :id");
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $price = $stmt->fetch();
+        return $price;
+    }
+
     function getProductByCategory($categoryId) {
         $stmt = $this->pdo->prepare("SELECT * FROM product WHERE category_id = :id");
         $stmt->bindParam(":id", $categoryId);

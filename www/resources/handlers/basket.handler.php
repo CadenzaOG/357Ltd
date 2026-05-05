@@ -8,9 +8,11 @@ error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
 require_once __DIR__ . '/../classes/BasketController.php';
+require_once __DIR__ . '/../classes/ProductController.php';
 
 $action = $_POST["action"] ?? null;
-$basketController = new BasketController();
+$productController =  new ProductController();
+$basketController = new BasketController($productController);
 
 if ($action == "update") {
     foreach ($_POST['quantity'] as $id => $quantity) {
