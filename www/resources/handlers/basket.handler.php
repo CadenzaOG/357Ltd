@@ -23,8 +23,8 @@ if ($action == "update") {
 }
 
 if ($action == "add") {
-    $productId = $_POST['add']['product_id'];
-    $quantity = $_POST['add']['quantity'];
+    $productId = $_POST['add_product_id'];
+    $quantity = $_POST['add_quantity'];
     $basketController->addItemToBasket($productId, $quantity);
 }
 
