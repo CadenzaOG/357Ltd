@@ -58,7 +58,7 @@ foreach ($allProducts as $product) {
         <th>Price</th>
     </tr>
         <?php
-        foreach ($_SESSION['user']['basket'] as $id => $item): ?>
+        foreach ($_SESSION['user']['basket']['items'] as $id => $item): ?>
         <form action="resources/handlers/basket.handler.php" method="post">
     <tr>
         <td><?= $productsById[$id]->name?></td>
