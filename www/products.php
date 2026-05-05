@@ -62,7 +62,7 @@ foreach ($allProducts as $product) {
         <form action="resources/handlers/basket.handler.php" method="post">
     <tr>
         <td><?= $productsById[$id]->name?></td>
-        <td><input type="number" name="quantity<?=[$id]?>" min="0" max="<?=$productsById[$id]->stock ?>" value="<?=$item['quantity']?>"></td>
+        <td><input type="number" name="quantity[<?=$id?>]" min="0" max="<?=$productsById[$id]->stock ?>" value="<?=$item['quantity']?>"></td>
     </tr>
         <?php endforeach; ?>
 </table>
