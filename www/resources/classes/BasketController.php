@@ -31,10 +31,10 @@ class BasketController
         $this->updateTotal();
     }
 
-    private function updateTotal() {
+   private function updateTotal() {
         $total=0;
         foreach ($this->basket as $id => $item) {
-            $price = $this->productController->getProductPrice($id);
+            $price = $this->productController->getProductById($id)->price;
             $productTotal = $price * $item['quantity'];
             $this->basket[$id]['total'] = $productTotal;
             $total += $productTotal;
