@@ -32,7 +32,7 @@ foreach ($allProducts as $product) {
         <th></th>
     </tr>
     <?php foreach ($allProducts as $product): ?>
-        <form action="resources/handlers/addtobasket.php" method="post">
+        <form action="resources/handlers/basket.handler.php" method="post">
         <tr>
                 <td><?= htmlspecialchars($product->name) ?></td>
                 <td><?= htmlspecialchars($product->description) ?></td>
@@ -43,7 +43,7 @@ foreach ($allProducts as $product) {
                     <input type="hidden" name="product_id" value="<?= $product->product_id ?>">
                 </td>
                 <td>
-                    <button type="submit">Add to Basket</button>
+                    <button type="submit" name="action" value="add">Add to Basket</button>
                 </td>
 
         </tr>
@@ -56,12 +56,16 @@ foreach ($allProducts as $product) {
     <tr>
         <th>Name</th>
         <th>Quantity</th>
+        <th>Price</th>
     </tr>
         <?php foreach ($_SESSION['user']['basket'] as $id => $item): ?>
+        <form action="resources/handlers/basket.handler.php" method="post">
     <tr>
         <td><?= $productsById[$id]->name?></td>
-        <td><?=$item['quantity']?></td>
+        <td><input type="number" name="quantity<?=[$id]?>" min="0" max="<?=$productsById[$id]->stock ?>" value="<?=$item['quantity']?>"></td>
     </tr>
+        </form>
         <?php endforeach; ?>
-
 </table>
+<button type="submit" name="action" value="update">Update Basket</button>
+</form>
