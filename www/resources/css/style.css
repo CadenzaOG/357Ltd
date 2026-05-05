@@ -1,3 +1,143 @@
-/*
+@import url('https://fonts.googleapis.com/css2?family=Cossette+Texte:wght@400;700&display=swap');
 
- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.highlight {
+    color: rgb(70, 168, 64);
+    font-weight: 600;
+}
+
+:root {
+    --light-grey: #C8CED2;
+    --mid-grey: #919BA1;
+    --dark-grey: #495158;
+    --black: #131313;
+    --accent: #895ac3;
+}
+
+body::-webkit-scrollbar {
+    display: none;  /* Safari and Chrome */
+}
+
+body {
+    font-family: "Cossette Texte", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+
+    background-color: var(--black);
+    color: var(--light-grey);
+
+    width: calc(100% - 2rem);
+    max-width: 60rem;
+
+    margin: 6rem auto;
+
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.title {
+    align-items: center;
+    margin-bottom: .2rem;
+
+    line-height: 2.9rem;
+
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 400;
+}
+
+.root {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+h1 {
+    font-size: inherit;
+    font-weight: 700;
+}
+
+a {
+    text-decoration: none;
+    color: var(--mid-grey);
+    transition: color 0.1s ease;
+}
+
+a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 80%, transparent);
+    filter: brightness(1.15);
+}
+
+p {
+    color: var(--light-grey);
+    transition:
+            color 0.1s ease,
+            text-shadow 0.3s ease,
+            filter 0.3s ease;
+}
+
+p:hover {
+    color: #fff;
+    text-shadow: 0 0 6px color-mix(in srgb, var(--accent) 80%, transparent);
+    filter: brightness(1.15);
+}
+
+.contact-footer {
+    display: flex;
+    padding: 1rem 0;
+    border-top: 1px solid var(--dark-grey);
+}
+
+.contact-left, .contact-right {
+    width: 50%;
+}
+
+.contact-left h2 {
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+.contact-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: calc(100% - 2rem);
+    max-width: 60rem;
+
+    padding: 1rem 0;
+    background: var(--black);
+    z-index: 100;
+}
+
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-right {
+    display: flex;
+    gap: 1.5rem;
+}
