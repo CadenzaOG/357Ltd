@@ -7,8 +7,10 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
 
-require_once __DIR__ . '/../classes/BasketController.php';
+require_once __DIR__ . '/../classes/DatabaseHandler.php';
 require_once __DIR__ . '/../classes/ProductController.php';
+require_once __DIR__ . '/../classes/BasketController.php';
+
 
 $action = $_POST["action"] ?? null;
 $productController =  new ProductController();
