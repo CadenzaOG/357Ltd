@@ -1,9 +1,11 @@
+/*
+* Author: Sean Boa
+* Date: April 2026
+*/
+
 <?php
 
-/*
- * Author: Sean Boa
- * Date: April 2026
- */
+
 
 require_once(__DIR__ . '/../../../dbconfig.php');
 
