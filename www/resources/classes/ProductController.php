@@ -40,4 +40,6 @@ class ProductController extends DatabaseHandler
         $products = $stmt->fetchAll();
         return $products;
     }
+
+
 }
