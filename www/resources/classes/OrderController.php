@@ -21,6 +21,19 @@ class OrderController extends DatabaseHandler
         $this->pdo = $this->connect();
     }
 
+    public function getOrders($uid) {
+        $stmt = $this->pdo->prepare("SELECT * FROM `orders` WHERE `customer_id` = :uid");
+        $stmt->bindParam(':uid', $uid);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll();
+
+        if (empty($result)) {
+            return false;
+        }
+        return $result;
+    }
+
     public function getOrder($uid, $orderId) {
         $stmt = $this->pdo->prepare("SELECT * FROM `customer_order` WHERE `customer_id` = :uid AND `order_id` = :orderId");
 
@@ -29,23 +42,37 @@ class OrderController extends DatabaseHandler
 
         $stmt->execute();
 
-        return $stmt->fetch();
+        $order = $stmt->fetch();
+
+        $orderProducts = $this->getOrderProducts($orderId);
+
+        $result['order'] = $order;
+        $result['orderProducts'] = $orderProducts;
+
+        return $result;
     }
 
-    public function getOrderProducts($uid, $orderId, $productController) {
+    public function getOrderProducts($uid, $orderId) {
 
-        $products = [];
+        try {
+            $stmt = $this->pdo->prepare("SELECT * FROM `order_product` WHERE `customer_id` = :uid AND `order_id` = :orderId");
 
-        $stmt = $this->pdo->prepare("SELECT * FROM `order_product` WHERE `customer_id` = :uid AND `order_id` = :orderId");
+            $stmt->bindParam(":uid", $uid);
+            $stmt->bindParam(":orderId", $orderId);
 
-        // Function to be finished
+            $stmt->execute();
 
+            $products = $stmt->fetchAll();
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
         return $products;
     }
 
     public function shipOrder($user, $orderId) {
-        if ($user->isAdmin()) {
-
+        if ($user->is_admin === 1) {
             $stmt = $this->pdo->prepare("UPDATE `customer_order` SET `shipped` = TRUE WHERE `order_id` = :orderId");
             $stmt->bindParam(":orderId", $orderId);
 
@@ -57,7 +84,45 @@ class OrderController extends DatabaseHandler
         return false;
     }
 
+
     public function cancelOrder($uid, $orderId) {
+
+        try {
+        $this->pdo->beginTransaction();
+
+        $products = $this->getOrderProducts($uid, $orderId);
+
+        $productStmt = $this->pdo->prepare("UPDATE `product` SET `stock` = `stock` + :quantity WHERE `product_id` = :productId");
+
+        foreach ($products as $product) {
+            $productStmt->bindParam(":quantity", $product->quantity);
+            $productStmt->bindParam(":productId", $product->product_id);
+            $productStmt->execute();
+
+            if ($productStmt->rowCount() === 0) {
+                $this->pdo->rollBack();
+                return false;
+            }
+        }
+
+        $deleted = $this->deleteOrder($uid, $orderId);
+
+        if (!$deleted) {
+            $this->pdo->rollBack();
+            return false;
+        }
+
+        $this->pdo->commit();
+
+
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+
+
+    }
+
+    public function deleteOrder($uid, $orderId) {
 
         $this->pdo->beginTransaction();
 
