@@ -1,9 +1,17 @@
+
+
+<?php
+
 /*
 * Author: Sean Boa
 * Date: May 2026
 */
 
-<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 class OrderController extends DatabaseHandler
 {
@@ -86,9 +94,12 @@ class OrderController extends DatabaseHandler
 
             $orderStmt->bindParam(':customer_id', $uid);
 
+            $orderStmt->execute();
+
             $orderId = $this->pdo->lastInsertId();
 
-            $orderProductStmt = $this->pdo->prepare('INSERT INTO order_product(`order_id`, `product_id`, `quantity`)');
+            $orderProductStmt = $this->pdo->prepare('INSERT INTO order_product(`order_id`, `product_id`, `quantity`) 
+                                                            VALUES (:order_id, :product_id, :quantity)');
 
             foreach ($basket as $productId => $product) {
 
@@ -113,9 +124,15 @@ class OrderController extends DatabaseHandler
 
                 }
                 $this->pdo->commit();
-                return true;
+                return $orderId;
 
         } catch (PDOException $e) {
+
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+
+            echo $e->getMessage();
             $this->pdo->rollBack();
             return false;
         }
