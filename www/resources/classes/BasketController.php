@@ -1,4 +1,13 @@
+
 <?php
+
+
+
+/*
+* Author: Sean Boa
+* Date: April 2026
+*/
+
 
 class BasketController
 {
@@ -11,6 +20,10 @@ class BasketController
         $this->productController = $productController;
     }
 
+    public function getBasketItems() {
+        return $this->basket['items'];
+    }
+
     public function addItemToBasket($productId, $quantity) {
         if (isset($this->basket['items'][$productId]['quantity'])) {
             $this->basket['items'][$productId]['quantity'] += $quantity;
@@ -19,7 +32,6 @@ class BasketController
         }
         $this->updateTotal();
     }
-
 
     public function updateBasketItem($productId, $quantity) {
         $this->basket['items'][$productId]['quantity'] = $quantity;

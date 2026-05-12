@@ -1,15 +1,20 @@
 <?php
 
+
+
 //
 
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+
 
 require_once __DIR__ . '/../classes/DatabaseHandler.php';
 require_once __DIR__ . '/../classes/ProductController.php';
 require_once __DIR__ . '/../classes/BasketController.php';
+require_once __DIR__ . '/../classes/OrderController.php';
 
 
 $action = $_POST["action"] ?? null;
@@ -33,6 +38,27 @@ if ($action == "add") {
     $quantity = $_POST['add_quantity'];
     $basketController->addItemToBasket($productId, $quantity);
     header('Location: ../../products.php?basket=updated');
+}
+
+if ($action == "order") {
+    $uid = $_SESSION['user']['uid'] ?? null;
+    if ($uid) {
+        $orderController = new OrderController();
+        $basket = $basketController->getBasketItems();
+
+        $orderId = $orderController->createOrder($uid, $basket);
+        if ($orderId) {
+            echo 'Order Successfully created for User: ' . $_SESSION['user']['name'] . ' -- Order ID: ' . $orderId;
+        } else {
+            echo 'Order failed';
+        }
+
+
+
+    } else {
+        header('Location: ../../login.html?error=notloggedin');
+    }
+
 }
 
 
