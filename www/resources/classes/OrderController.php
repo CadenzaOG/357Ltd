@@ -22,7 +22,7 @@ class OrderController extends DatabaseHandler
     }
 
     public function getOrders($uid) {
-        $stmt = $this->pdo->prepare("SELECT * FROM `orders` WHERE `customer_id` = :uid");
+        $stmt = $this->pdo->prepare("SELECT * FROM `customer_order` WHERE `customer_id` = :uid");
         $stmt->bindParam(':uid', $uid);
         $stmt->execute();
 
