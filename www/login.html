@@ -1,19 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+
 <body>
+
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="index.php">
+            <strong>357ltd</strong>
+        </a>
+    </div>
+
+    <div name="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="index.php">
+                Home
+            </a>
+            <a class="navbar-item" href="products.php">
+                Products
+            </a>
+            <a class="navbar-item" href="account.php">
+                Account
+            </a>
+        </div>
+    </div>
+
+    <div class="navbar-end">
+        <div class="navbar-item">
+            <div class="buttons">
+                <a class="button is-large" href="basket.php">
+                    <span class="icon">
+                        <i class="fas fa-basket-shopping"></i>
+                    </span>
+                </a>
+                <a class="button is-light" href="resources/handlers/logout.php">
+                    Logout
+                </a>
+            </div>
+        </div>
+    </div>
+
+</nav>
 <main>
-<h1>Login</h1>
-    <form action="resources/handlers/login.handler.php" method="post">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" placeholder=""><br>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder=""><br>
-        <button type="submit">Login</button>
-    </form>
+    <div class="hero">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="columns is-centered">
+                    <div class="column is-6">
+                        <div class="box">
+                            <h1 class="title is-primary">Login</h1>
+                            <form class="form" action="resources/handlers/login.handler.php" method="post">
+                                <div class="field">
+                                    <label class="label" for="username">Student Number</label>
+                                    <input class="input" type="text" id="username" name="username" placeholder="">
+                                </div>
+
+                                <div class="field">
+                                    <label class="label" for="password">Password</label>
+                                    <input class="input" type="password" id="password" name="password" placeholder="">
+                                </div>
+                                    <div class="control">
+                                        <button class="button is-info is-fullwidth mt-6 mb-6" type="submit">Login</button>
+                                    </div>
+                            </form>
+                            <span class="subtitle"><a class="is-link" href="signup.html">Not a member?</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
 </main>
 </body>
 </html>
