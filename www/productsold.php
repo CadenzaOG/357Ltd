@@ -1,3 +1,20 @@
+<?php
+
+session_start();
+
+require __DIR__ . '/resources/classes/DatabaseHandler.php';
+require __DIR__ . '/resources/classes/ProductController.php';
+
+$productController = new ProductController();
+
+$allProducts = $productController->getAllProducts();
+
+$productsById = [];
+foreach ($allProducts as $product) {
+    $productsById[$product->product_id] = $product;
+}
+?>
+
 <!DOCTYPE html>
 <html data-theme="light">
 <head>
@@ -51,39 +68,45 @@
     </div>
 
 </nav>
-<main>
-    <div class="hero">
-        <div class="hero-body">
-            <div class="container has-text-centered">
-                <div class="columns is-centered">
-                    <div class="column is-6">
-                        <div class="box">
-                            <h1 class="title is-primary">Login</h1>
-                            <form class="form" action="resources/handlers/login.handler.php" method="post">
-                                <div class="field">
-                                    <label class="label" for="username">Student Number</label>
-                                    <input class="input" type="text" id="username" name="username" placeholder="">
-                                </div>
-
-                                <div class="field">
-                                    <label class="label" for="password">Password</label>
-                                    <input class="input" type="password" id="password" name="password" placeholder="">
-                                </div>
-                                    <div class="control">
-                                        <button class="button is-info is-fullwidth mt-6 mb-6" type="submit">Login</button>
-                                    </div>
-                            </form>
-                            <span class="subtitle"><a class="is-link" href="signup.html">Not a member?</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
-    </div>
 
 
-</main>
+
+<h1>All Products</h1>
+<table style="border: 1px solid">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Available Stock</th>
+        <th>Quantity</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($allProducts as $product): ?>
+        <form action="resources/handlers/basket.handler.php" method="post">
+        <tr>
+                <td><?= htmlspecialchars($product->name) ?></td>
+                <td><?= htmlspecialchars($product->description) ?></td>
+                <td>£<?= htmlspecialchars($product->price) ?></td>
+                <td><?= htmlspecialchars($product->stock) ?></td>
+                <td>
+                    <input type="number" name="add_quantity" value="1" min="1" max="<?= $product->stock ?>">
+                    <input type="hidden" name="add_product_id" value="<?= $product->product_id ?>">
+                </td>
+                <td>
+                    <button type="submit" name="action" value="add">Add to Basket</button>
+                </td>
+
+        </tr>
+        </form>
+    <?php endforeach; ?>
+    </tbody>
+</table>
+
+
 </body>
 </html>

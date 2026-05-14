@@ -1,103 +1,129 @@
-<!DOCTYPE html>
-<html data-theme="light">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello Bulma!</title>
+<?php
 
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
-    >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
-<body>
-<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="index.php">
-            <strong>357ltd</strong>
-        </a>
+$pageTitle = 'Order History';
+
+require __DIR__ . '/resources/includes/account.include.php';
+
+$orderSuccess = $_GET['ordersuccess'] ?? null;
+$orderCancelled = $_GET['ordercancelled'] ?? null;
+
+include "resources/views/header.php";
+
+?>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+    });
+</script>
+
+<?php if($orderSuccess): ?>
+
+<div class="column is-3 is-offset-4">
+    <div class="notification is-info is-light has-text-centered">
+        <button class="delete"></button>
+        Order successfully placed.  Order ID: <?= $orderSuccess ?>
     </div>
+</div>
 
-    <div name="navbarBasic" class="navbar-menu">
-        <div class="navbar-start">
-            <a class="navbar-item" href="index.php">
-                Home
-            </a>
-            <a class="navbar-item" href="products.php">
-                Products
-            </a>
-            <a class="navbar-item" href="account.php">
-                Account
-            </a>
-        </div>
+<?php elseif ($orderCancelled): ?>
+
+<div class="column is-3 is-offset-4">
+    <div class="notification is-danger is-light has-text-centered">
+        <button class="delete"></button>
+        Order successfully cancelled.  Order ID: <?= $orderCancelled ?>
     </div>
+</div>
 
-    <div class="navbar-end">
-        <div class="navbar-item">
-            <div class="buttons">
-                <a class="navbar-item" href="basket.php">
-                    <span class="icon">
-                        <i class="fas fa-cart-shopping fa-2x"></i>
-                    </span>
-                </a>
-                <a class="button is-light" href="resources/handlers/logout.php">
-                    Logout
-                </a>
-            </div>
-        </div>
-    </div>
-
-</nav>
+<?php endif; ?>
 
 
 
 <section class="section">
     <div class="container">
         <h1 class="title">Order History</h1>
+        <?php if(!$orders): ?>
+        <p class="subtitle">No orders to display</p>
+        <?php else: ?>
         <p class="subtitle">View and manage your orders</p>
         <table class="table is-fullwidth is-striped is-hoverable">
             <thead>
             <tr>
                 <th>Order ID</th>
-                <th>Order Date</th>
-                <th>Order Time</th>
-                <th>Shipped</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Total</th>
+                <th>Status</th>
                 <th>Cancel</th>
             </tr>
             </thead>
 
             <tbody>
-            <?php
-
-            require __DIR__ . '/resources/includes/account.include.php';
 
 
-            foreach ($orders as $order) : ?>
+
+            <?php foreach ($orders as $order) : ?>
+
+            <?php $status = $order->shipped;
+
+            $tag = '';
+
+            switch ($status) {
+                case '0': $tag = 'is-warning'; break;
+                case '1': $tag = 'is-success'; break;
+                case '2': $tag = 'is-danger'; break;
+            }
+
+            ?>
 
                 <tr>
                     <td><?=$order->order_id?></td>
                     <td><?=$order->order_date?></td>
                     <td><?=$order->order_time?></td>
-                    <td><span class="tag <?= $order->shipped ? 'is-success' : 'is-warning'?>">
-                        <?= $order->shipped ? 'Shipped' : 'Awaiting Shipment'?></span></td>
+                    <td>£<?=$order->order_total?></td>
+                    <td><span class="tag <?=$tag?>">
+                            <?php if($status == '0'): ?>
+                            Awaiting Shipment
+                            <?php elseif($status == '1'): ?>
+                            Delivered
+                            <?php elseif($status == '2'): ?>
+                            Cancelled
+                            <?php endif; ?>
+                        </span></td>
                     <td>
                         <?php if(!$order->shipped) : ?>
-                        <a class="button is-danger">
+                        <form action="resources/handlers/order.handler.php"
+                              method="post"
+                              >
+                            <input type="hidden" name="orderId" value="<?=$order->order_id?>">
+                        <button class="button is-danger is-small"
+                        type="submit"
+                        name="action"
+                        value="cancelOrder">
                             <span class="icon">
                                 <i class="fas fa-ban"></i>
                             </span>
                             <span>Cancel Order</span>
-                        </a>
+                        </button>
                         <?php endif; ?>
                     </td>
                 </tr>
 
             <?php endforeach; ?>
+
+
             </tbody>
         </table>
+        <?php endif; ?>
     </div>
 </section>
-</body>
-</html>
 
+<?php include __DIR__ . '/resources/views/footer.html'; ?>

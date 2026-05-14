@@ -15,6 +15,12 @@ class BasketController
     private $basket;
     private $productController;
 
+    public function clearBasket() {
+        unset($this->basket);
+    }
+
+
+
     public function __construct($productController) {
         $this->basket = &$_SESSION['user']['basket'];
         $this->productController = $productController;
@@ -54,6 +60,11 @@ class BasketController
         }
         $this->basket['total'] = $total;
     }
+
+    public function getTotal() {
+        return $this->basket['total'];
+    }
+
 
 
 }

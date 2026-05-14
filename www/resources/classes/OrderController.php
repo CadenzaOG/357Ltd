@@ -71,6 +71,7 @@ class OrderController extends DatabaseHandler
         return $products;
     }
 
+    // May not use -- planned for admin panel
     public function shipOrder($user, $orderId) {
         if ($user->is_admin === 1) {
             $stmt = $this->pdo->prepare("UPDATE `customer_order` SET `shipped` = TRUE WHERE `order_id` = :orderId");
@@ -105,14 +106,17 @@ class OrderController extends DatabaseHandler
             }
         }
 
-        $deleted = $this->deleteOrder($uid, $orderId);
+        $orderStmt = $this->pdo->prepare("UPDATE `customer_order` SET `shipped` = 2 WHERE `order_id` = :orderId");
+        $orderStmt->bindParam(":orderId", $orderId);
+        $orderStmt->execute();
 
-        if (!$deleted) {
+        if ($orderStmt->rowCount() === 0) {
             $this->pdo->rollBack();
             return false;
         }
 
         $this->pdo->commit();
+        return true;
 
 
         } catch (PDOException $e) {
@@ -122,42 +126,43 @@ class OrderController extends DatabaseHandler
 
     }
 
-    public function deleteOrder($uid, $orderId) {
+//    public function deleteOrder($uid, $orderId) {
+//
+//        $this->pdo->beginTransaction();
+//
+//        $productStmt = $this->pdo->prepare("DELETE FROM `order_product` WHERE `order_id` = :orderId");
+//
+//        $productStmt->bindParam(":orderId", $orderId);
+//
+//        $productStmt->execute();
+//
+//        if ($productStmt->rowCount() === 0) {
+//            $this->pdo->rollBack();
+//            return false;
+//        }
+//
+//        $orderStmt = $this->pdo->prepare("DELETE FROM `customer_order` WHERE `order_id` = :orderId AND `shipped` = FALSE");
+//
+//        $orderStmt->bindParam(":orderId", $orderId);
+//
+//        $orderStmt->execute();
+//
+//        if ($orderStmt->rowCount() === 0) {
+//            $this->pdo->rollBack();
+//            return false;
+//        }
+//    }
 
-        $this->pdo->beginTransaction();
-
-        $productStmt = $this->pdo->prepare("DELETE FROM `order_product` WHERE `order_id` = :orderId");
-
-        $productStmt->bindParam(":orderId", $orderId);
-
-        $productStmt->execute();
-
-        if ($productStmt->rowCount() === 0) {
-            $this->pdo->rollBack();
-            return false;
-        }
-
-        $orderStmt = $this->pdo->prepare("DELETE FROM `customer_order` WHERE `order_id` = :orderId AND `shipped` = FALSE");
-
-        $orderStmt->bindParam(":orderId", $orderId);
-
-        $orderStmt->execute();
-
-        if ($orderStmt->rowCount() === 0) {
-            $this->pdo->rollBack();
-            return false;
-        }
-    }
-
-    public function createOrder($uid, $basket) {
+    public function createOrder($uid, $basket,$total) {
 
         try {
             $this->pdo->beginTransaction();
 
-            $orderStmt = $this->pdo->prepare('INSERT INTO customer_order(`customer_id`, `order_date`, `order_time`, `shipped`) 
-                                                    VALUES (:customer_id, CURRENT_DATE, CURRENT_TIME, FALSE)');
+            $orderStmt = $this->pdo->prepare('INSERT INTO customer_order(`customer_id`, `order_date`, `order_time`, `order_total`, `shipped`) 
+                                                    VALUES (:customer_id, CURRENT_DATE, CURRENT_TIME,:total, FALSE)');
 
             $orderStmt->bindParam(':customer_id', $uid);
+            $orderStmt->bindParam(':total', $total);
 
             $orderStmt->execute();
 

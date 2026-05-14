@@ -41,5 +41,12 @@ class ProductController extends DatabaseHandler
         return $products;
     }
 
+    function getCategories() {
+        $stmt = $this->pdo->prepare("SELECT category_id, description FROM category");
+        $stmt->execute();
+        $categories = $stmt->fetchAll(PDO::FETCH_UNIQUE);
+        return $categories;
+    }
+
 
 }

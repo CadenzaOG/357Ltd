@@ -36,18 +36,33 @@
     </div>
 
     <div class="navbar-end">
-        <div class="navbar-item">
-            <div class="buttons">
-                <a class="navbar-item" href="basket.php">
-                    <span class="icon has-text-primary">
-                        <i class="fas fa-basket-shopping fa-2x"></i>
-                    </span>
-                </a>
-                <a class="has-text-primary-light" href="resources/handlers/logout.php">
-                    Logout
-                </a>
-            </div>
+        <div class="buttons">
+<!--            <a class="navbar-item" href="basket.php">-->
+<!--            <span class="icon has-text-primary-light">-->
+<!--                <i class="fas fa-shopping-cart fa-2x"></i>-->
+<!--            </span>-->
+<!--            </a>-->
+
+            <a class="navbar-item" href="resources/handlers/logout.php">
+                <div class="icon-text">
+                    <span class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        </span>
+                    <span class="">Shopping Cart</span>
+                </div>
+            </a>
+
+
+            <a class="navbar-item" href="resources/handlers/logout.php">
+                <div class="icon-text">
+                    <span class="icon">
+                        <i class="fas fa-right-from-bracket"></i>
+                        </span>
+                    <span class="">Logout</span>
+                </div>
+            </a>
         </div>
+
     </div>
 
 </nav>
@@ -155,7 +170,7 @@
                             </div>
                             <div class="field">
                                 <div class="control">
-                                    <button class="button is-danger has-text-danger-invert is-normal" type="submit">Signup</button>
+                                    <button class="button is-info is-fullwidth" type="submit">Signup</button>
                                 </div>
                             </div>
                         </form>
