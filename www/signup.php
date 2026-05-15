@@ -1,5 +1,11 @@
 <?php
 
+/*
+* Author: Sean Boa
+* Date: May 2026
+*/
+
+
 $pageTitle = 'Signup';
 
 include 'resources/views/header.php';

@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require __DIR__ . '/resources/classes/DatabaseHandler.php';
 require __DIR__ . '/resources/classes/ProductController.php';
 

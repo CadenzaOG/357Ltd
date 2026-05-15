@@ -1,12 +1,10 @@
 <?php
 
-// Placeholder index page, just using for testing backend and outputting database/session information.
+/*
+* Author: Sean Boa
+* Date: May 2026
+*/
 
-session_start();
-
-if (isset($_SESSION['user'])) {
-    $name = $_SESSION['user']['name'];
-}
 
 $pageTitle = '357ltd';
 include 'resources/views/header.php'
