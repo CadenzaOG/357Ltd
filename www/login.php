@@ -1,18 +1,20 @@
 <?php
 
-//Get username & password without any spaces before/after
-$username = trim($_POST['username']);
+require_once __DIR__ . '/resources/classes/DatabaseHandler.php';
+require_once __DIR__ . '/resources/classes/LoginController.php';
+
+//Get username & password, removing any spaces before/after
+$studentNumber = trim($_POST['username']);
 $password = trim($_POST['password']);
 
 //Checking if username/password is blank
-if (empty($username) || empty($password)) {
+if (empty($studentNumber) || empty($password)) {
     echo "Username or Password is empty";
+    exit();
 }
 
-//Checking if username/password are in the database
-if (username === $validUsername && $password === $validPassword) {
-    session.start();
-} else {
-    echo "Invalid username or password";
-}
+//Connect to LoginController
+$login = new LoginController($studentNumber, $password);
 
+//Log in attempt
+$login->login();
