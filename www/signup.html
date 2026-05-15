@@ -1,29 +1,187 @@
-<form method="POST" action="resources/handlers/signup.handler.php">
-    <label for="student_number">Student Number:</label>
-    <input type="text" name="student_number" id="student_number"><br>
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
 
-    <label for="forename">First Name</label>
-    <input type="text" name="forename" id="forename"><br>
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
 
-    <label for="surname">Surname</label>
-    <input type="text" name="surname" id="surname"><br>
+<body>
 
-    <label for="house">House</label>
-    <input type="text" name="house" id="house"><br>
+<nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="index.php">
+            <strong>357ltd</strong>
+        </a>
+    </div>
 
-    <label for="street">Street</label>
-    <input type="text" name="street" id="street"><br>
+    <div name="navbarBasic" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="index.php">
+                Home
+            </a>
+            <a class="navbar-item" href="products.php">
+                Products
+            </a>
+            <a class="navbar-item" href="account.php">
+                Account
+            </a>
+        </div>
+    </div>
 
-    <label for="town">Town</label>
-    <input type="text" name="town" id="town"><br>
+    <div class="navbar-end">
+        <div class="buttons">
+<!--            <a class="navbar-item" href="basket.php">-->
+<!--            <span class="icon has-text-primary-light">-->
+<!--                <i class="fas fa-shopping-cart fa-2x"></i>-->
+<!--            </span>-->
+<!--            </a>-->
 
-    <label for="postcode">Postcode</label>
-    <input type="text" name="postcode" id="postcode"><br>
-    <label for="email">Email</label>
-    <input type="text" name="email" id="email"><br>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password"><br>
-    <label for="confirm_password">Confirm Password</label>
-    <input type="password" name="confirm_password" id="confirm_password">
-    <input type="submit">
-</form>
+            <a class="navbar-item" href="resources/handlers/logout.php">
+                <div class="icon-text">
+                    <span class="icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        </span>
+                    <span class="">Shopping Cart</span>
+                </div>
+            </a>
+
+
+            <a class="navbar-item" href="resources/handlers/logout.php">
+                <div class="icon-text">
+                    <span class="icon">
+                        <i class="fas fa-right-from-bracket"></i>
+                        </span>
+                    <span class="">Logout</span>
+                </div>
+            </a>
+        </div>
+
+    </div>
+
+</nav>
+<div class="hero">
+    <div class="hero-body">
+        <div class="container">
+            <div class="columns has-text-centered">
+                <div class="column is-two-thirds is-offset-2">
+                    <div class="box">
+                        <h1 class="title">Signup</h1>
+                        <form class="form" method="POST" action="resources/handlers/signup.handler.php">
+
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                    <label class="label" for="student_number">Student Number</label>
+                                </div>
+
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input" type="text" name="student_number"
+                                                   id="student_number">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="forename">First Name</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="forename" id="forename">
+                                </div>
+                            </div>
+
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="surname">Surname</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="surname" id="surname">
+                                </div>
+                            </div>
+
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="house">House</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="house" id="house">
+                                </div>
+
+                            </div>
+
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="street">Street</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="street" id="street">
+                                </div>
+                            </div>
+
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="town">Town</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="town" id="town">
+                                </div>
+                            </div>
+
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="postcode">Postcode</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="text" name="postcode" id="postcode">
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="email" id="email">Email</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" name="email" type="email" placeholder="">
+                                </div>
+
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="password">Password</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="password" name="password" id="password">
+                                </div>
+                            </div>
+                            <div class="field is-horizontal">
+                                <div class="field-label">
+                                    <label class="label" for="confirm_password">Confirm Password</label>
+                                </div>
+                                <div class="field-body">
+                                    <input class="input" type="password" name="confirm_password" id="confirm_password">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <button class="button is-info is-fullwidth" type="submit">Signup</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+
+    </section>
+</body>
+</html>
+
