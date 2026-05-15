@@ -126,33 +126,6 @@ class OrderController extends DatabaseHandler
 
     }
 
-//    public function deleteOrder($uid, $orderId) {
-//
-//        $this->pdo->beginTransaction();
-//
-//        $productStmt = $this->pdo->prepare("DELETE FROM `order_product` WHERE `order_id` = :orderId");
-//
-//        $productStmt->bindParam(":orderId", $orderId);
-//
-//        $productStmt->execute();
-//
-//        if ($productStmt->rowCount() === 0) {
-//            $this->pdo->rollBack();
-//            return false;
-//        }
-//
-//        $orderStmt = $this->pdo->prepare("DELETE FROM `customer_order` WHERE `order_id` = :orderId AND `shipped` = FALSE");
-//
-//        $orderStmt->bindParam(":orderId", $orderId);
-//
-//        $orderStmt->execute();
-//
-//        if ($orderStmt->rowCount() === 0) {
-//            $this->pdo->rollBack();
-//            return false;
-//        }
-//    }
-
     public function createOrder($uid, $basket,$total) {
 
         try {
@@ -207,5 +180,35 @@ class OrderController extends DatabaseHandler
             return false;
         }
     }
+
+
+//    UNUSED FUNCTION
+//
+//    public function deleteOrder($uid, $orderId) {
+//
+//        $this->pdo->beginTransaction();
+//
+//        $productStmt = $this->pdo->prepare("DELETE FROM `order_product` WHERE `order_id` = :orderId");
+//
+//        $productStmt->bindParam(":orderId", $orderId);
+//
+//        $productStmt->execute();
+//
+//        if ($productStmt->rowCount() === 0) {
+//            $this->pdo->rollBack();
+//            return false;
+//        }
+//
+//        $orderStmt = $this->pdo->prepare("DELETE FROM `customer_order` WHERE `order_id` = :orderId AND `shipped` = FALSE");
+//
+//        $orderStmt->bindParam(":orderId", $orderId);
+//
+//        $orderStmt->execute();
+//
+//        if ($orderStmt->rowCount() === 0) {
+//            $this->pdo->rollBack();
+//            return false;
+//        }
+//    }
 
 }
