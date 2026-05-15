@@ -19,5 +19,5 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $loginController = new LoginController($studentNumber, $password);
     $loginController->login();
 } else {
-    header('Location:login.html');
+    header('Location:login.php');
 }

@@ -1,4 +1,13 @@
+
 <?php
+
+
+
+/*
+* Author: Sean Boa
+* Date: April 2026
+*/
+
 
 class BasketController
 {
@@ -6,9 +15,20 @@ class BasketController
     private $basket;
     private $productController;
 
+    public function clearBasket() {
+        $_SESSION['user']['basket'] = [
+            'items' => [],
+            'total' => 0
+        ];
+    }
+
     public function __construct($productController) {
         $this->basket = &$_SESSION['user']['basket'];
         $this->productController = $productController;
+    }
+
+    public function getBasketItems() {
+        return $this->basket['items'];
     }
 
     public function addItemToBasket($productId, $quantity) {
@@ -19,7 +39,6 @@ class BasketController
         }
         $this->updateTotal();
     }
-
 
     public function updateBasketItem($productId, $quantity) {
         $this->basket['items'][$productId]['quantity'] = $quantity;
@@ -42,6 +61,11 @@ class BasketController
         }
         $this->basket['total'] = $total;
     }
+
+    public function getTotal() {
+        return $this->basket['total'];
+    }
+
 
 
 }
