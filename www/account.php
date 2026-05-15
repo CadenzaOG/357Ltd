@@ -8,12 +8,14 @@
 
 $pageTitle = 'Order History';
 
+include "resources/views/header.php";
+
 require __DIR__ . '/resources/includes/account.include.php';
 
 $orderSuccess = $_GET['ordersuccess'] ?? null;
 $orderCancelled = $_GET['ordercancelled'] ?? null;
 
-include "resources/views/header.php";
+
 
 ?>
 
