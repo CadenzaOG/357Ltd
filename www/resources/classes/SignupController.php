@@ -103,7 +103,7 @@ class SignupController extends DatabaseHandler
     }
 
     private function generateError($type, $message) {
-        $_SESSION['errors'][$type][] = $message;
+        $_SESSION['errors']['signup'][$type][] = $message;
     }
 
 

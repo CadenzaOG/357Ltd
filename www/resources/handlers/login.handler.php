@@ -1,6 +1,9 @@
 <?php
 
-//
+session_start();
+
+// Author: Sean Boa and Callum Flanagan
+// Date: April-May 2026
 
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
@@ -13,11 +16,23 @@ $studentNumber = '';
 $password = '';
 
 if (isset($_POST['username']) && isset($_POST['password'])) {
-    $studentNumber = $_POST['username'];
-    $password = $_POST['password'];
+    //Get username & password, removing any spaces before/after - Callum
+    $studentNumber = trim($_POST['username']);
+    $password = trim($_POST['password']);
 
+
+    //Checking if username/password is blank
+    if (empty($studentNumber) || empty($password)) {
+        if (empty($studentNumber)) {
+            $_SESSION['errors']['login']['studentNumber'][] = 'Student Number is required';
+        }
+        if (empty($password)) {
+            $_SESSION['errors']['login']['password'][] = 'Password is required';
+        }
+        header('Location: ../../login.php?errors=1');
+    }
     $loginController = new LoginController($studentNumber, $password);
     $loginController->login();
 } else {
-    header('Location:login.php');
+    header('Location:login.php?loginfail=1');
 }

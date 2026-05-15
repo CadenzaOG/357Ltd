@@ -1,5 +1,11 @@
 <?php
 
+/*
+* Author: Sean Boa
+* Date: May 2026
+*/
+
+
 $pageTitle = 'Order History';
 
 require __DIR__ . '/resources/includes/account.include.php';

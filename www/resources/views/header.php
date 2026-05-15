@@ -1,4 +1,6 @@
-
+<?php
+sessiOn_start()
+?>
 <!DOCTYPE html>
 <html data-theme="light">
 <head>

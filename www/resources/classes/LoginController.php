@@ -27,6 +27,20 @@ class LoginController extends DatabaseHandler
             exit;
         }
         $user = $stmt->fetch();
+
+        if (!$user) {
+            $this->generateError('studentNumber','User not found'
+            );
+            return false;
+        }
+
+        $passwordCorrect = password_verify($password, $user->password);
+
+        if (!$passwordCorrect) {
+            $this->generateError('password','Password incorrect');
+            return false;
+        }
+
         if ($user && password_verify($password, $user->password)) {
             return $user;
         }
@@ -34,7 +48,6 @@ class LoginController extends DatabaseHandler
     }
 
     function login() {
-        session_start();
         $result = $this->getUser($this->studentNumber, $this->password);
         if ($result) {
             $_SESSION['user']['name'] = $result->forename . ' ' . $result->surname;
@@ -42,10 +55,19 @@ class LoginController extends DatabaseHandler
             $_SESSION['user']['uid'] = $result->customer_id;
 
             // Temporary redirect to homepage with name in the URL for testing purpose.
-            header('Location:../../index.php?='.$_SESSION['user']['name']);
+            header('Location:../../index.php');
             exit();
         } else {
-            header('Location:../../index.php?error=usernotfound');
+            header('Location:../../login.php?error=1');
+        }
+
+    }
+
+    private function generateError($type, $message) {
+        if(!isset($_SESSION['errors']['login'][$type])) {
+            $_SESSION['errors']['login'][$type] = [$message];
+        } else {
+            array_push($_SESSION['errors']['login'][$type], $message);
         }
 
     }
