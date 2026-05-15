@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 $uid = $_SESSION["user"]["uid"] ?? null;
 
 if(!$uid) {
-    header("Location: ../../login.html");
+    header("Location: ../../login.php");
 }
 
 

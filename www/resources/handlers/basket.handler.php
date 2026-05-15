@@ -30,7 +30,7 @@ if ($action == "update") {
                 header('Location: ../../basket.php?updated=1');
             } else {
                 $basketController->removeFromBasket($id);
-                header('Location: ../../products.php?basket=updated');
+                header('Location: ../../basket.php?updated=1');
             }
         }
     } else {
@@ -62,7 +62,7 @@ if ($action == "order") {
                 echo 'Order failed';
             }
         } else {
-            header('Location: ../../login.html?error=notloggedin');
+            header('Location: ../../login.php?error=notloggedin');
         }
     } else {
         header('Location: ../../basket.php?orderfail=basketempty');

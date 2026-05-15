@@ -119,7 +119,7 @@ include __DIR__ . '/resources/views/header.php';
                                     <div class="card-footer-item">
                                     <div class="field is-grouped is-justify-content-right">
                                         <div class="control">
-                                            <input class="input is-normal"
+                                            <input class="input is-normal is-primary"
                                                    type="number"
                                                    name="add_quantity"
                                                    value="1"

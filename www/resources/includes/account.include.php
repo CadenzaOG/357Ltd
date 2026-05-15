@@ -3,7 +3,7 @@
 session_start();
 
 if (!isset($_SESSION['user']['uid'])) {
-    header ("Location: login.html");
+    header ("Location: login.php");
 }
 
 require_once __DIR__ . '/../classes/DatabaseHandler.php';

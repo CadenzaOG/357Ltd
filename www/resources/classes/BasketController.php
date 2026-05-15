@@ -16,10 +16,11 @@ class BasketController
     private $productController;
 
     public function clearBasket() {
-        unset($this->basket);
+        $_SESSION['user']['basket'] = [
+            'items' => [],
+            'total' => 0
+        ];
     }
-
-
 
     public function __construct($productController) {
         $this->basket = &$_SESSION['user']['basket'];

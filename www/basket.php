@@ -7,6 +7,8 @@ session_start();
 
 require __DIR__ . '/resources/classes/DatabaseHandler.php';
 require __DIR__ . '/resources/classes/ProductController.php';
+require __DIR__ . '/resources/classes/BasketController.php';
+
 
 $productController = new ProductController();
 $categories = $productController->getCategories();
@@ -61,7 +63,7 @@ include __DIR__ . '/resources/views/header.php';
                             <tr>
                                 <td>
                                     <figure class="image is-96x96">
-                                        <img class="is-rounded" src="resources/images/placeholder.svg">
+                                        <img class="is-rounded" src="resources/images/placeholder.svg" alt="placeholder">
                                     </figure>
                                 </td>
                                 <td class="is-size-5"><?= $productsById[$id]->name ?></td>
